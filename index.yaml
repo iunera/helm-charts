@@ -2,6 +2,21 @@ apiVersion: v1
 entries:
   springbootchart:
   - apiVersion: v2
+    appVersion: 0.1.2
+    created: "2023-06-06T15:18:49.551095187Z"
+    description: A Helm chart for Kubernetes to host straight forward spring boot
+      apps
+    digest: 08a72d653ebbb92bf96decaace327b0baf518b6407a5744338bbeab49efeb8aa
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: springbootchart
+    type: application
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/springbootchart-0.1.2/springbootchart-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 0.1.0
     created: "2023-06-06T13:31:11.901672873Z"
     description: A Helm chart for Kubernetes to host straight forward spring boot
@@ -31,4 +46,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/superset-1.1.13/superset-1.1.13.tgz
     version: 1.1.13
-generated: "2023-06-06T13:42:52.407027144Z"
+generated: "2023-06-06T15:18:49.551107888Z"
