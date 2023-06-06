@@ -16,4 +16,19 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/springbootchart-0.1.1/springbootchart-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-06T13:31:11.901683173Z"
+  superset:
+  - apiVersion: v1
+    appVersion: 0.38.0
+    created: "2023-06-06T13:42:52.407018044Z"
+    description: iunera Apache Superset (incubating) is a modern, enterprise-ready
+      business intelligence web application
+    digest: 1467ee5761419c241beeb54d02bb0b927707ba5c3f80e79aa8a70950cc82c064
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: superset
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/superset-1.1.13/superset-1.1.13.tgz
+    version: 1.1.13
+generated: "2023-06-06T13:42:52.407027144Z"
