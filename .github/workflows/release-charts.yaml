@@ -1,4 +1,6 @@
-name: Helm
+      # https://github.com/helm/charts-repo-actions-demo/blob/main/.github/workflows/release.yaml
+
+name: Release Charts
 
 on:
   push:
@@ -34,4 +36,3 @@ jobs:
         with:
           charts_dir: charts
 
-      # https://github.com/helm/charts-repo-actions-demo/blob/main/.github/workflows/release.yaml
