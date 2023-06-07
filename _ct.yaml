@@ -19,3 +19,4 @@ excluded-charts:
   - pivot
   - strimzi-kafka-operator
   - wordpress
+  - mariadb

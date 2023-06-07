@@ -1,0 +1,6 @@
+dependencies:
+- name: mariadb
+  repository: https://iunera.github.io/helm-charts
+  version: 7.10.4
+digest: sha256:d66e7bc80482c13e98795093ba06f44d1c27d478f89a0cf23c8607eaba196a23
+generated: "2023-06-07T15:13:54.28512+02:00"

@@ -33,8 +33,7 @@ jobs:
       - name: Add dependencies
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo add common https://charts.bitnami.com/bitnami
-          helm repo add mariadb https://charts.bitnami.com/bitnami
+          helm repo add iunera https://iunera.github.io/helm-charts
 
       - name: Helm Chart Releaser
         uses: helm/chart-releaser-action@v1.5.0
