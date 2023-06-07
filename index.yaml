@@ -1,5 +1,205 @@
 apiVersion: v1
 entries:
+  dex:
+  - apiVersion: v1
+    appVersion: 2.27.0
+    created: "2023-06-07T13:09:46.192196166Z"
+    description: Dex federated authentication service
+    digest: 560c52fc57e711af9a6d873034128f096d63a9c08aab8b6c386ced0fa02e3342
+    icon: https://github.com/coreos/dex/blob/master/Documentation/logos/dex-horizontal-color.png
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: dex
+    sources:
+    - https://github.com/coreos/dex
+    - https://github.com/mintel/dex-k8s-authenticator/tree/master/charts/dex
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/dex-1.4.0-fix/dex-1.4.0-fix.tgz
+    version: 1.4.0-fix
+  dex-k8s-authenticator:
+  - apiVersion: v1
+    appVersion: v1.4.0
+    created: "2023-06-07T13:09:46.311978008Z"
+    description: Authenticator for using Dex with Kubernetes. Source from mintel
+    digest: 06f726a214566f775cbe8b8699c80afe20fe0f3ec4cb68580b79ab3464c7db52
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: dex-k8s-authenticator
+    sources:
+    - https://github.com/mintel/dex-k8s-authenticator
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/dex-k8s-authenticator-1.4.0/dex-k8s-authenticator-1.4.0.tgz
+    version: 1.4.0
+  kafkamagic:
+  - apiVersion: v2
+    appVersion: 2.0.3.4
+    created: "2023-06-07T13:09:46.449972605Z"
+    description: A Helm chart for Kubernetes
+    digest: f595c0169e0e993ecf0dce69723e9c3b30c99967e9fce06ecd372114b6dd6074
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: kafkamagic
+    type: application
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/kafkamagic-0.1.0/kafkamagic-0.1.0.tgz
+    version: 0.1.0
+  ldap-user-manager:
+  - apiVersion: v1
+    created: "2023-06-07T13:09:46.636792557Z"
+    description: A helm chart for ldap-user-manager adapted by iunera
+    digest: f5a07c4c71db3a067974171ab28595416308445accd49f3e55a2aff13ac8b748
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: ldap-user-manager
+    sources:
+    - https://github.com/wheelybird/ldap-user-manager
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/ldap-user-manager-0.0.2/ldap-user-manager-0.0.2.tgz
+    version: 0.0.2
+  mariadb:
+  - annotations:
+      category: Database
+    apiVersion: v1
+    appVersion: 10.3.24
+    created: "2023-06-07T13:09:46.771440889Z"
+    description: Fast, reliable, scalable, and easy to use open-source relational
+      database system. MariaDB Server is intended for mission-critical, heavy-load
+      production systems as well as for embedding into mass-deployed software. Highly
+      available MariaDB cluster.
+    digest: 87a75a3415db395b96d2b1a85088591a628a71308d09846652a1e80b17669ca7
+    home: https://github.com/bitnami/charts/tree/master/bitnami/mariadb
+    icon: https://bitnami.com/assets/stacks/mariadb/img/mariadb-stack-220x234.png
+    keywords:
+    - mariadb
+    - mysql
+    - database
+    - sql
+    - prometheus
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: mariadb
+    sources:
+    - https://github.com/bitnami/bitnami-docker-mariadb
+    - https://github.com/prometheus/mysqld_exporter
+    - https://mariadb.org
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/mariadb-7.10.4/mariadb-7.10.4.tgz
+    version: 7.10.4
+  metabase:
+  - apiVersion: v1
+    appVersion: v0.38.0.1
+    created: "2023-06-07T13:09:46.939944482Z"
+    description: iunera customized metabase chart from legacy helmcharts
+    digest: 48a66a544b198c8f756d9f2272d2f5039b3632ba02d744750404bb1a1aa3b63a
+    home: http://www.metabase.com/
+    icon: http://www.metabase.com/images/logo.svg
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: metabase
+    sources:
+    - https://github.com/metabase/metabase
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/metabase-0.13.2/metabase-0.13.2.tgz
+    version: 0.13.2
+  openldap:
+  - apiVersion: v1
+    appVersion: 2.4.48
+    created: "2023-06-07T13:09:47.083037379Z"
+    description: Community developed LDAP software
+    digest: ea020f9b59f13f0464ff27d35020ee255b180aac0a0b219dfe35b48a177c0a4c
+    home: https://www.openldap.org
+    icon: http://www.openldap.org/images/headers/LDAPworm.gif
+    keywords:
+    - ldap
+    - openldap
+    maintainers:
+    - email: enis@apache.org
+      name: enis
+    name: openldap
+    sources:
+    - https://github.com/kubernetes/charts
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/openldap-1.2.5/openldap-1.2.5.tgz
+    version: 1.2.5
+  phpldapadmin:
+  - apiVersion: v2
+    appVersion: 0.7.1
+    created: "2023-06-07T13:09:47.405827389Z"
+    description: Web-based LDAP browser to manage your LDAP server
+    digest: 0a55261b7e5c837698fb8dd8e62347004897e848ec684641fbce0252b41fc94e
+    home: http://phpldapadmin.sourceforge.net
+    icon: http://phpldapadmin.sourceforge.net/wiki/images/d/d4/Logo.jpg
+    keywords:
+    - phpldapadmin
+    - openldap
+    - userrights
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: phpldapadmin
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/phpldapadmin-0.1.3/phpldapadmin-0.1.3.tgz
+    version: 0.1.3
+  pivot:
+  - apiVersion: v2
+    appVersion: "20170610"
+    created: "2023-06-07T13:09:47.589431877Z"
+    description: A Helm chart for Kubernetes
+    digest: 5ed23fbeb41adec228b01ed9235c9bad842e971ae66e317494dd70ad2c17ab6c
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: pivot
+    type: application
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/pivot-0.1.0/pivot-0.1.0.tgz
+    version: 0.1.0
+  postgresql:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 11.14.0
+    created: "2023-06-07T13:09:47.743128381Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Legacy Chart for PostgreSQL from bitnami.
+    digest: e92ba321a13003ed257873b8035e460fe96d0e8d4aaec6549d453ec9777164f4
+    home: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-220x234.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    - replication
+    - cluster
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: postgresql
+    sources:
+    - https://github.com/bitnami/bitnami-docker-postgresql
+    - https://www.postgresql.org/
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/postgresql-10.15.2/postgresql-10.15.2.tgz
+    version: 10.15.2
   springbootchart:
   - apiVersion: v2
     appVersion: 0.1.2
@@ -31,6 +231,34 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/springbootchart-0.1.1/springbootchart-0.1.1.tgz
     version: 0.1.1
+  strimzi-kafka-operator:
+  - apiVersion: v2
+    appVersion: 0.19.0
+    created: "2023-06-07T13:09:47.898041409Z"
+    description: 'Strimzi: Apache Kafka running on Kubernetes'
+    digest: d236f55152554032a8d79bb0c0adbbe82e23a1f26e5f3363fcce7dbf57b941f0
+    home: https://strimzi.io/
+    icon: https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/master/documentation/logo/strimzi_logo.png
+    keywords:
+    - kafka
+    - queue
+    - stream
+    - event
+    - messaging
+    - datastore
+    - topic
+    maintainers:
+    - name: Frawless
+    - name: ppatierno
+    - name: samuel-hawker
+    - name: scholzj
+    - name: tombentley
+    name: strimzi-kafka-operator
+    sources:
+    - https://github.com/strimzi/strimzi-kafka-operator
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/strimzi-kafka-operator-0.19.0/strimzi-kafka-operator-0.19.0.tgz
+    version: 0.19.0
   superset:
   - apiVersion: v1
     appVersion: 0.38.0
@@ -46,4 +274,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/superset-1.1.13/superset-1.1.13.tgz
     version: 1.1.13
-generated: "2023-06-06T15:18:49.551107888Z"
+generated: "2023-06-07T13:09:47.898172112Z"
