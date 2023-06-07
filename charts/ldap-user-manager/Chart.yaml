@@ -5,5 +5,6 @@ version: 0.0.2
 sources:
 - https://github.com/wheelybird/ldap-user-manager
 maintainers:
-- name: Christian Schmitt
-  email: christian.schmitt@iunera.com
+  - name: iunera
+    email: contact@iunera.com
+    url: https://www.iunera.com

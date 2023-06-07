@@ -71,9 +71,9 @@ readinessProbe:
     path: /
     port: http
 livenessProbe:
-   httpGet:
-     path: /
-     port: http
+  httpGet:
+    path: /
+    port: http
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
