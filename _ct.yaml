@@ -1,9 +1,19 @@
 # See https://github.com/helm/chart-testing#configuration
 remote: origin
-target-branch: main
+target-branch: charts_migration
 chart-dirs:
   - charts
+chart-repos:
+  - common=https://charts.bitnami.com/bitnami
 helm-extra-args: --timeout 600s
+helm-dependency-extra-args: --skip-refresh
 excluded-charts:
   - dex
   - dex-k8s-authenticator
+  - kafkamagic
+  - ldapadmin
+  - openldap
+  - postgresql-legacy
+  - superset
+  - ldap-user-manager
+  - pivot
