@@ -1,10 +1,11 @@
 apiVersion: v1
 appVersion: "v1.4.0"
-description: "Authenticator for using Dex with Kubernetes"
+description: "Authenticator for using Dex with Kubernetes. Source from mintel"
 name: dex-k8s-authenticator
 version: 1.4.0
 sources:
 - https://github.com/mintel/dex-k8s-authenticator
 maintainers:
-- name: Nick Badger
-  email: nbadger@mintel.com
+  - name: iunera
+    email: contact@iunera.com
+    url: https://www.iunera.com
