@@ -1,6 +1,6 @@
 # See https://github.com/helm/chart-testing#configuration
 remote: origin
-target-branch: charts_migration
+target-branch: main
 chart-dirs:
   - charts
 chart-repos:
@@ -17,3 +17,4 @@ excluded-charts:
   - superset
   - ldap-user-manager
   - pivot
+  - strimzi-kafka-operator
