@@ -4,3 +4,6 @@ target-branch: main
 chart-dirs:
   - charts
 helm-extra-args: --timeout 600s
+excluded-charts:
+  - dex
+  - dex-k8s-authenticator
