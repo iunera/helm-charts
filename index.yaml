@@ -274,4 +274,26 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/superset-1.1.13/superset-1.1.13.tgz
     version: 1.1.13
-generated: "2023-06-07T13:09:47.898172112Z"
+  wordpress:
+  - apiVersion: v2
+    appVersion: 5.5.3
+    created: "2023-06-07T13:17:08.855692663Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://iunera.github.io/helm-charts
+      tags:
+      - wordpress-database
+      version: 7.x.x
+    description: iunera Wordpress Helm chart for Kubernetes
+    digest: a5559c84df9a7cd07216775f1d1e8c81044400af6a27f8320e0bc3e0d6e0781c
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: wordpress
+    type: application
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
+    version: 0.1.1
+generated: "2023-06-07T13:17:08.855713864Z"
