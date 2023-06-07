@@ -152,6 +152,25 @@ entries:
   phpldapadmin:
   - apiVersion: v2
     appVersion: 0.7.1
+    created: "2023-06-07T14:02:12.958106141Z"
+    description: Web-based LDAP browser to manage your LDAP server
+    digest: d3a831e76d4884452720eedc090382890e7bce5bc43f20d1c3376649a0c5d832
+    home: http://phpldapadmin.sourceforge.net
+    icon: http://phpldapadmin.sourceforge.net/wiki/images/d/d4/Logo.jpg
+    keywords:
+    - phpldapadmin
+    - openldap
+    - userrights
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: phpldapadmin
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/phpldapadmin-0.1.4/phpldapadmin-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 0.7.1
     created: "2023-06-07T13:09:47.405827389Z"
     description: Web-based LDAP browser to manage your LDAP server
     digest: 0a55261b7e5c837698fb8dd8e62347004897e848ec684641fbce0252b41fc94e
@@ -313,4 +332,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-07T13:38:26.871011609Z"
+generated: "2023-06-07T14:02:12.958126241Z"
