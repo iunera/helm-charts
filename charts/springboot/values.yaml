@@ -133,6 +133,7 @@ securityContext:
   capabilities:
     drop:
     - ALL
+    add: []
   readOnlyRootFilesystem: true
   runAsNonRoot: true
   runAsUser: 1000
