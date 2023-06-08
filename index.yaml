@@ -236,6 +236,26 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/postgresql-10.15.2/postgresql-10.15.2.tgz
     version: 10.15.2
+  springboot:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2023-06-08T18:41:14.694603163Z"
+    description: A Helm chart for Kubernetes to host straight forward spring boot
+      apps
+    digest: 5d46e80e1ff4091d480d8b38a2e1a858b0e07760b9657e8f7f683e12ec2ed022
+    icon: https://www.iunera.com/wp-content/uploads/2020/01/iuneralogo-header.png
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: springboot
+    sources:
+    - https://github.com/iunera
+    - https://github.com/iunera/helm-charts/tree/main/charts/springboot
+    type: application
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/springboot-2.0.0/springboot-2.0.0.tgz
+    version: 2.0.0
   springbootchart:
   - apiVersion: v2
     appVersion: 0.1.2
@@ -332,4 +352,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-07T14:02:12.958126241Z"
+generated: "2023-06-08T18:41:14.694617963Z"
