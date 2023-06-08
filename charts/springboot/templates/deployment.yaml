@@ -103,6 +103,11 @@ spec:
               name: {{ $existing.name }}
             {{- end }}
 
+            {{- range $emptyDir := .Values.volumes.emptyDirs }}
+            - mountPath: {{ $emptyDir.mountPath }}
+              name: {{ $emptyDir.name }}
+            {{- end }}
+
             {{- if .Values.volumes.pvc.enabled }}
             - mountPath: {{ .Values.volumes.pvc.mountPath }}
               name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}
@@ -117,17 +122,24 @@ spec:
         - name: {{ $existing.name }}
           configMap:
             name: {{ $existing.configmap }}
-      {{- end }}
+        {{- end }}
         {{- range $conf := .Values.volumes.configMaps }}
         - name: {{ $conf.name }}
           configMap:
             name: {{ $conf.name }}
-      {{- end }}
+        {{- end }}
         {{- range $existing := .Values.volumes.existingSecrets }}
         - name: {{ $existing.name }}
           secret:
             secretName: {{ $existing.secretName }}
-      {{- end }}
+        {{- end }}
+
+        {{- range $emptyDir := .Values.volumes.emptyDirs }}
+        - name: {{ $emptyDir.name }}
+          emptyDir:
+            sizeLimit: {{ $emptyDir.sizeLimit  }}
+        {{- end }}
+
       {{- if .Values.volumes.pvc.enabled}}
         - name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}
           persistentVolumeClaim:

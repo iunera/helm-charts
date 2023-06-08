@@ -58,9 +58,11 @@ Features are:
 * support persistence and existingPvc
 * support configMaps and existingConfigMaps
 * support mounting secrets as volumes for jaas-configs, keystores.jks or ssh keys etc.
-* resource limits per default: `cpu: 500m` / `memory: 256Mi`
+* resource limits per default: `cpu: 500m` / `memory: 256Mi` / `ephemeral-storage: "4Gi"`
 * support plain `env:` and `envFrom:` Settings
 * default prometheus scrape metrics with port `8080` and `/actuator/prometheus`
+* securityContext with `Drop: ALL`, `readOnlyRootFilesystem` and force to `uid/gid: 1000` by default 
+* `emptyDir /tmp` by default
 
 ## TODO 
 
@@ -71,7 +73,7 @@ https://github.com/hazelcast/charts/blob/master/stable/hazelcast-enterprise/valu
 
 https://github.com/cetic/helm-microservice/tree/master/templates
 
-podSecurityContext: {}
-securityContext: {}
-initContainer:
+initContainer: ??
+
+
 ````

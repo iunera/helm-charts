@@ -48,7 +48,12 @@ prometheusScrapeMetrics:
 
 
 volumes:
-  enabled: false
+  enabled: true
+  emptyDirs:
+    - name: cache-volume
+      mountPath: /tmp
+      sizeLimit: 500Mi
+
   pvc:
     enabled: false
     existing_claim:
@@ -118,17 +123,19 @@ serviceAccount:
 
 podAnnotations: {}
 
+podSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
 
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# requires emptyDir for the path /tmp with springboot when readOnlyRootFilesystem:true
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
 
 service:
   type: ClusterIP
@@ -154,9 +161,12 @@ resources:
   limits:
     cpu: 500m
     memory: 256Mi
+    ephemeral-storage: "4Gi"
   requests:
     cpu: 500m
     memory: 256Mi
+    ephemeral-storage: "2Gi"
+
 
 autoscaling:
   enabled: false
