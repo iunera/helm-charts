@@ -55,31 +55,25 @@ Features are:
 * Default actuator endpoints to `/actuator/health` for `livenessProbe` and `readinessProbe`
 * support `hostAliases` for legacy Applications
 * support `extraArgs` for parameters in spring-boot
-* support persistence/pvc and 
+* support persistence and existingPvc
 * support configMaps and existingConfigMaps
-* support mounting secrets as Volumes for jaas configs, keystores.jks or ssh keys etc.
-* resource limits per default: cpu: 200m / memory: 256Mi
-
+* support mounting secrets as volumes for jaas-configs, keystores.jks or ssh keys etc.
+* resource limits per default: `cpu: 200m` / `memory: 256Mi`
+* support plain `env:` and `envFrom:` Settings
 
 ## TODO 
 
+
 ````
-
-env support
-env support from configmaps
-env support from secrets
-- name: POSTGRES_REPLICATION_PASSWORD
-  valueFrom:
-    secretKeyRef:
-      name: {{ template "postgresql.secretName" . }}
-
+metrics: 
 
 Nodeport / ClusterIP support beispiel hier https://github.com/cetic/helm-microservice/tree/master/templates
-
-
 
 https://github.com/hazelcast/charts/blob/master/stable/hazelcast-enterprise/values.yaml
 
 https://github.com/cetic/helm-microservice/tree/master/templates
 
+podSecurityContext: {}
+securityContext: {}
+initContainer:
 ````

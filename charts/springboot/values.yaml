@@ -14,6 +14,19 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+env: {}
+  # - name: LOGLEVEL
+  #   value: debug
+  # - name: SSH_PUBLIC_KEY
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: ssh-key-secret
+  #       key: ssh-publickey
+
+envFrom: # {}
+  # - configMapRef:
+  #     name: environment-config
+
 extraArgs: []
   # - --server.port=8080
   # - --spring.application.name=iu-gtfs-rest-dev
@@ -47,6 +60,11 @@ volumes:
     #     test.conf: |
     #       hello
     #       hello2
+    # - name: environment-config
+    #   mountPath: /environment
+    #   data: 
+    #     SPECIAL_LEVEL: very
+    #     SPECIAL_TYPE: charm
     # - name: test-from-file
     #   mountPath: /test2
     #   files:
@@ -85,7 +103,7 @@ readinessProbe: {}
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
