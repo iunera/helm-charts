@@ -19,20 +19,26 @@ containerPort: 8080
 # livenessProbePath: "/actuator/health"
 # readinessProbePath: "/actuator/health"
 
+hostAliases: 
+  - ip: "127.0.0.1"
+    hostnames:
+    - "foo.local"
+    - "bar.local"
+  - ip: "10.1.2.3"
+    hostnames:
+    - "foo.remote"
+    - "bar.remote"
+extraArgs: []
+
+
 livenessProbe: {}
+readinessProbe: {}
   # httpGet:
   #   path: /healthz
   #   port: 8080
   #   httpHeaders:
   #   - name: Custom-Header
   #     value: Awesome
-
-readinessProbe: {}
-
-extraArgs: []
-
-hostAliases: []
-
 
 serviceAccount:
   # Specifies whether a service account should be created
