@@ -1,4 +1,4 @@
-# Default values for springbootchart.
+# Default values for springboot.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -14,56 +14,160 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-# Default spring pors and actuator endpoints
-containerPort: 8080
-livenessProbePath: "/actuator/health"
-readinessProbePath: "/actuator/health"
+env: {}
+  # - name: LOGLEVEL
+  #   value: debug
+  # - name: SSH_PUBLIC_KEY
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: ssh-key-secret
+  #       key: ssh-publickey
+
+envFrom: {}
+  # - configMapRef:
+  #     name: environment-config
 
 extraArgs: []
+  # - --server.port=8080
+  # - --spring.application.name=iu-gtfs-rest-dev
 
 hostAliases: []
+  # - ip: "127.0.0.1"
+  #   hostnames:
+  #   - "foo.local"
+  #   - "bar.local"
+  # - ip: "10.1.2.3"
+  #   hostnames:
+  #   - "foo.remote"
+  #   - "bar.remote"
+
+prometheusScrapeMetrics:
+  enabled: false
+  # port:
+  # path:
+
+
+volumes:
+  enabled: true
+  emptyDirs:
+    - name: cache-volume
+      mountPath: /tmp
+      sizeLimit: 500Mi
+
+  pvc:
+    enabled: false
+    existing_claim:
+    name: pvc
+    mountPath: /pv
+    size: 1G
+    class:
+    accessModes:
+      - ReadWriteOnce
+
+  configMaps:
+    # - name: test
+    #   mountPath: /test
+    #   data:
+    #     test.conf: |
+    #       hello
+    #       hello2
+    # - name: environment-config
+    #   mountPath: /environment
+    #   data:
+    #     SPECIAL_LEVEL: very
+    #     SPECIAL_TYPE: charm
+    # - name: test-from-file
+    #   mountPath: /test2
+    #   files:
+    #     - source: config.conf
+    #       destination: application.conf
+    # - name: test-mixed
+    #   mountPath: /test3
+    #   data:
+    #     test2.conf: |
+    #       another hello
+    #   files:
+    #     - source: ./config.conf
+    #       destination: application2.conf
+
+  existingConfigMaps:
+    # - name: kube-root-ca # name of the volumeMount and volume in lowercase RFC 1123 format
+    #   configmap: kube-root-ca.crt # name of the configmap
+    #   mountPath: /kube-root-ca
+    # - name: game-config
+    #   configmap: game-config
+    #   mountPath: /game-config
+
+  existingSecrets:
+    # - name: ssh-key-secret # name of the volumeMount and volume in lowercase RFC 1123 format
+    #   secretName: ssh-key-secret
+    #   mountPath: /home/spring/.ssh
+
+livenessProbe: {}
+readinessProbe: {}
+  # httpGet:
+  #   path: /healthz
+  #   port: 8080
+  #   httpHeaders:
+  #   - name: Custom-Header
+  #     value: Awesome
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# requires emptyDir for the path /tmp with springboot when readOnlyRootFilesystem:true
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+    add: []
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 ingress:
   enabled: false
+  className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
-      paths: []
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
+resources:
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+    ephemeral-storage: "4Gi"
+  requests:
+    cpu: 500m
+    memory: 512Mi
+    ephemeral-storage: "2Gi"
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
 
 autoscaling:
   enabled: false

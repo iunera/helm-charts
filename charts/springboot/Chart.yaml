@@ -1,12 +1,19 @@
 apiVersion: v2
-name: springbootchart
+name: springboot
 description: A Helm chart for Kubernetes to host straight forward spring boot apps
+
+type: application
+
+version: 2.0.0
+
+appVersion: "2.0.0"
 
 maintainers:
   - name: iunera
     email: contact@iunera.com
     url: https://www.iunera.com
 
-type: application
-version: 0.1.2
-appVersion: 0.1.2
+icon: https://www.iunera.com/wp-content/uploads/2020/01/iuneralogo-header.png
+sources:
+- https://github.com/iunera
+- https://github.com/iunera/helm-charts/tree/main/charts/springboot

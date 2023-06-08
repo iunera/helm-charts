@@ -1,0 +1,26 @@
+{{- if .Values.volumes.configMaps }}
+{{- if .Values.volumes.enabled }}
+{{ $root := . }}
+{{ range $cm := .Values.volumes.configMaps}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $cm.name }}
+data:
+  {{- if $cm.data }}
+  {{- range $filename, $content := $cm.data }}
+  # property-like keys; each key maps to a simple value
+  {{ $filename }}: |-
+{{ $content | toString | indent 4}}
+  {{- end }}
+  {{- end }}
+  {{- if $cm.files }}
+  {{- range $file := $cm.files }}
+  {{ $file.destination }}: |
+    {{ $root.Files.Get $file.source }}
+  {{- end}}
+  {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
