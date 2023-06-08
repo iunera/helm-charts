@@ -55,7 +55,7 @@ Features are:
 * Default actuator endpoints to `/actuator/health` for `livenessProbe` and `readinessProbe`
 * support `hostAliases` for legacy Applications
 * add `extraArgs` for parameters in spring-boot
-
+* support persistence/pvc and configMaps
 ## TODO 
 
 ````
@@ -79,9 +79,9 @@ secrets support
                   name: {{ template "postgresql.secretName" . }}
 
 
-persistence
-
 https://github.com/hazelcast/charts/blob/master/stable/hazelcast-enterprise/values.yaml
 
+
+resource limits per default
 
 ````

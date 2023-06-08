@@ -71,8 +71,36 @@ spec:
               path: /actuator/health
               port: http
           {{- end }}
+          {{- if .Values.volumes.enabled }}
+          volumeMounts:
+
+            {{- range $conf := .Values.volumes.configMaps }}
+            - mountPath: {{ $conf.mountPath }}
+              name: {{ $conf.name }}-volume
+            {{- end }}
+
+            {{- if .Values.volumes.pvc.enabled }}
+            - mountPath: {{ .Values.volumes.pvc.mountPath }}
+              name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}-volume
+            {{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+
+      {{- if .Values.volumes.enabled }}
+      volumes:
+        {{- range $conf := .Values.volumes.configMaps }}
+        - name: {{ $conf.name }}-volume
+          configMap:
+            name: {{ $conf.name }}
+      {{- end }}
+      {{- if .Values.volumes.pvc.enabled}}
+        - name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}
+      {{- end}}
+      {{- end }}
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

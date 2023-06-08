@@ -14,20 +14,59 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-
-hostAliases: 
-  - ip: "127.0.0.1"
-    hostnames:
-    - "foo.local"
-    - "bar.local"
-  - ip: "10.1.2.3"
-    hostnames:
-    - "foo.remote"
-    - "bar.remote"
-
 extraArgs: []
   # - --server.port=8080
   # - --spring.application.name=iu-gtfs-rest-dev
+
+hostAliases: []
+  # - ip: "127.0.0.1"
+  #   hostnames:
+  #   - "foo.local"
+  #   - "bar.local"
+  # - ip: "10.1.2.3"
+  #   hostnames:
+  #   - "foo.remote"
+  #   - "bar.remote"
+
+volumes:
+  enabled: true
+  pvc:
+    enabled: false
+    existing_claim:
+    name: pvc
+    mountPath: /pv
+    size: 1G
+    class:
+    accessModes:
+      - ReadWriteOnce
+
+    # - name: existingConfigmap
+    #   mountPath: /existing
+    #   existing_configMap: kube-root-ca.crt
+
+  configMaps:
+    # - name: test
+    #   mountPath: /test
+    #   data:
+    #     test.conf: |
+    #       hello
+    #       hello2
+
+
+    # - name: test-from-file
+    #   mountPath: /test2
+    #   files:
+    #     - source: config.conf
+    #       destination: application.conf
+
+    # - name: test-mixed
+    #   mountPath: /test3
+    #   data:
+    #     test2.conf: |
+    #       another hello
+    #   files:
+    #     - source: ./config.conf
+    #       destination: application2.conf
 
 
 livenessProbe: {}
