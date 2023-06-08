@@ -57,31 +57,24 @@ Features are:
 * support `extraArgs` for parameters in spring-boot
 * support persistence/pvc and 
 * support configMaps and existingConfigMaps
+* support mounting secrets as Volumes for jaas configs, keystores.jks or ssh keys etc.
 
 
 ## TODO 
 
 ````
 
-secrets volume support
-
 env support
 env support from configmaps
 env support from secrets
+- name: POSTGRES_REPLICATION_PASSWORD
+  valueFrom:
+    secretKeyRef:
+      name: {{ template "postgresql.secretName" . }}
 
 
 Nodeport / ClusterIP support beispiel hier https://github.com/cetic/helm-microservice/tree/master/templates
 
-
-
-
-
-
-
-            - name: POSTGRES_REPLICATION_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "postgresql.secretName" . }}
 
 
 https://github.com/hazelcast/charts/blob/master/stable/hazelcast-enterprise/values.yaml
@@ -89,5 +82,6 @@ https://github.com/hazelcast/charts/blob/master/stable/hazelcast-enterprise/valu
 https://github.com/cetic/helm-microservice/tree/master/templates
 
 resource limits per default
+
 
 ````

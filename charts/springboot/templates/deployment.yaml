@@ -75,17 +75,22 @@ spec:
           volumeMounts:
             {{- range $existing := .Values.volumes.existingConfigMaps }}
             - mountPath: {{ $existing.mountPath }}
-              name: {{ $existing.volume_name }}
+              name: {{ $existing.name }}
             {{- end }}
 
             {{- range $conf := .Values.volumes.configMaps }}
             - mountPath: {{ $conf.mountPath }}
-              name: {{ $conf.name }}-volume
+              name: {{ $conf.name }}
+            {{- end }}
+
+            {{- range $existing := .Values.volumes.existingSecrets }}
+            - mountPath: {{ $existing.mountPath }}
+              name: {{ $existing.name }}
             {{- end }}
 
             {{- if .Values.volumes.pvc.enabled }}
             - mountPath: {{ .Values.volumes.pvc.mountPath }}
-              name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}-volume
+              name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}
             {{- end }}
           {{- end }}
           resources:
@@ -94,17 +99,22 @@ spec:
       {{- if .Values.volumes.enabled }}
       volumes:
         {{- range $existing := .Values.volumes.existingConfigMaps }}
-        - name: {{ $existing.volume_name }}
+        - name: {{ $existing.name }}
           configMap:
-            name: {{ $existing.configmap_name }}
+            name: {{ $existing.configmap }}
       {{- end }}
         {{- range $conf := .Values.volumes.configMaps }}
-        - name: {{ $conf.name }}-volume
+        - name: {{ $conf.name }}
           configMap:
             name: {{ $conf.name }}
       {{- end }}
+        {{- range $existing := .Values.volumes.existingSecrets }}
+        - name: {{ $existing.name }}
+          secret:
+            secretName: {{ $existing.secretName }}
+      {{- end }}
       {{- if .Values.volumes.pvc.enabled}}
-        - name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}-volume
+        - name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}
           persistentVolumeClaim:
             claimName: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}
       {{- end}}
