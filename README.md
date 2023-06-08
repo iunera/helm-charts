@@ -58,6 +58,7 @@ Features are:
 * support persistence/pvc and 
 * support configMaps and existingConfigMaps
 * support mounting secrets as Volumes for jaas configs, keystores.jks or ssh keys etc.
+* resource limits per default: cpu: 200m / memory: 256Mi
 
 
 ## TODO 
@@ -80,8 +81,5 @@ Nodeport / ClusterIP support beispiel hier https://github.com/cetic/helm-microse
 https://github.com/hazelcast/charts/blob/master/stable/hazelcast-enterprise/values.yaml
 
 https://github.com/cetic/helm-microservice/tree/master/templates
-
-resource limits per default
-
 
 ````
