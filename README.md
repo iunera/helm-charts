@@ -58,7 +58,7 @@ Features are:
 * support persistence and existingPvc
 * support configMaps and existingConfigMaps
 * support mounting secrets as volumes for jaas-configs, keystores.jks or ssh keys etc.
-* resource limits per default: `cpu: 200m` / `memory: 256Mi`
+* resource limits per default: `cpu: 500m` / `memory: 256Mi`
 * support plain `env:` and `envFrom:` Settings
 
 ## TODO 

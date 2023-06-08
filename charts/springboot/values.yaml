@@ -23,7 +23,7 @@ env: {}
   #       name: ssh-key-secret
   #       key: ssh-publickey
 
-envFrom: # {}
+envFrom: {}
   # - configMapRef:
   #     name: environment-config
 
@@ -62,7 +62,7 @@ volumes:
     #       hello2
     # - name: environment-config
     #   mountPath: /environment
-    #   data: 
+    #   data:
     #     SPECIAL_LEVEL: very
     #     SPECIAL_TYPE: charm
     # - name: test-from-file
@@ -87,7 +87,7 @@ volumes:
     #   configmap: game-config
     #   mountPath: /game-config
 
-  existingSecrets: # for jaas config, truststore.jks or ssh keys etc.
+  existingSecrets:
     # - name: ssh-key-secret # name of the volumeMount and volume in lowercase RFC 1123 format
     #   secretName: ssh-key-secret
     #   mountPath: /home/spring/.ssh
@@ -145,10 +145,10 @@ ingress:
 
 resources:
   limits:
-    cpu: 200m
+    cpu: 500m
     memory: 256Mi
   requests:
-    cpu: 200m
+    cpu: 500m
     memory: 256Mi
 
 autoscaling:
