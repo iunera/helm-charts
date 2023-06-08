@@ -60,13 +60,11 @@ Features are:
 * support mounting secrets as volumes for jaas-configs, keystores.jks or ssh keys etc.
 * resource limits per default: `cpu: 500m` / `memory: 256Mi`
 * support plain `env:` and `envFrom:` Settings
+* default prometheus scrape metrics with port `8080` and `/actuator/prometheus`
 
 ## TODO 
 
-
 ````
-metrics: 
-
 Nodeport / ClusterIP support beispiel hier https://github.com/cetic/helm-microservice/tree/master/templates
 
 https://github.com/hazelcast/charts/blob/master/stable/hazelcast-enterprise/values.yaml

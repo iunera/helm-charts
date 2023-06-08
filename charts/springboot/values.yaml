@@ -41,6 +41,12 @@ hostAliases: []
   #   - "foo.remote"
   #   - "bar.remote"
 
+prometheusScrapeMetrics:
+  enabled: true
+  # port:
+  # path:
+
+
 volumes:
   enabled: false
   pvc:
@@ -111,6 +117,7 @@ serviceAccount:
   name: ""
 
 podAnnotations: {}
+
 
 podSecurityContext: {}
   # fsGroup: 2000

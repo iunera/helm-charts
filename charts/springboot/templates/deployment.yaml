@@ -13,9 +13,16 @@ spec:
       {{- include "springboot.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- if or (.Values.podAnnotations) (.Values.prometheusScrapeMetrics.enabled) }}
       annotations:
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.prometheusScrapeMetrics.enabled }}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: {{ .Values.prometheusScrapeMetrics.port | default .Values.service.port }}
+        prometheus.io/path: {{ .Values.prometheusScrapeMetrics.path | default "/actuator/prometheus" }}
+      {{- end }}
       {{- end }}
       labels:
         {{- include "springboot.selectorLabels" . | nindent 8 }}
