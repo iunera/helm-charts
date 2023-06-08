@@ -73,6 +73,10 @@ spec:
           {{- end }}
           {{- if .Values.volumes.enabled }}
           volumeMounts:
+            {{- range $existing := .Values.volumes.existingConfigMaps }}
+            - mountPath: {{ $existing.mountPath }}
+              name: {{ $existing.volume_name }}
+            {{- end }}
 
             {{- range $conf := .Values.volumes.configMaps }}
             - mountPath: {{ $conf.mountPath }}
@@ -89,6 +93,11 @@ spec:
 
       {{- if .Values.volumes.enabled }}
       volumes:
+        {{- range $existing := .Values.volumes.existingConfigMaps }}
+        - name: {{ $existing.volume_name }}
+          configMap:
+            name: {{ $existing.configmap_name }}
+      {{- end }}
         {{- range $conf := .Values.volumes.configMaps }}
         - name: {{ $conf.name }}-volume
           configMap:

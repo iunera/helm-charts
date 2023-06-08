@@ -54,21 +54,26 @@ helm install my-release iunera/springboot --values values.yaml
 Features are: 
 * Default actuator endpoints to `/actuator/health` for `livenessProbe` and `readinessProbe`
 * support `hostAliases` for legacy Applications
-* add `extraArgs` for parameters in spring-boot
-* support persistence/pvc and configMaps
+* support `extraArgs` for parameters in spring-boot
+* support persistence/pvc and 
+* support configMaps and existingConfigMaps
+
+
 ## TODO 
 
 ````
 
+secrets volume support
+
 env support
+env support from configmaps
+env support from secrets
+
 
 Nodeport / ClusterIP support beispiel hier https://github.com/cetic/helm-microservice/tree/master/templates
 
 
-configmal support?
 
-
-secrets support 
 
 
 
@@ -81,6 +86,7 @@ secrets support
 
 https://github.com/hazelcast/charts/blob/master/stable/hazelcast-enterprise/values.yaml
 
+https://github.com/cetic/helm-microservice/tree/master/templates
 
 resource limits per default
 

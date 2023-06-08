@@ -29,7 +29,7 @@ hostAliases: []
   #   - "bar.remote"
 
 volumes:
-  enabled: true
+  enabled: false
   pvc:
     enabled: false
     existing_claim:
@@ -40,9 +40,13 @@ volumes:
     accessModes:
       - ReadWriteOnce
 
-    # - name: existingConfigmap
-    #   mountPath: /existing
-    #   existing_configMap: kube-root-ca.crt
+  existingConfigMaps:
+    # - volume_name: kube-root-ca # name of the volumeMount and volume in lowercase RFC 1123 format
+    #   configmap_name: kube-root-ca.crt # name of the configmap
+    #   mountPath: /kube-root-ca
+    # - volume_name: game-config
+    #   configmap_name: game-config
+    #   mountPath: /game-config
 
   configMaps:
     # - name: test
@@ -51,14 +55,11 @@ volumes:
     #     test.conf: |
     #       hello
     #       hello2
-
-
     # - name: test-from-file
     #   mountPath: /test2
     #   files:
     #     - source: config.conf
     #       destination: application.conf
-
     # - name: test-mixed
     #   mountPath: /test3
     #   data:
@@ -67,7 +68,6 @@ volumes:
     #   files:
     #     - source: ./config.conf
     #       destination: application2.conf
-
 
 livenessProbe: {}
 readinessProbe: {}
