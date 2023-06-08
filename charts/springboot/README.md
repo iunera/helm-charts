@@ -62,15 +62,5 @@ Features are:
 * `emptyDir /tmp` by default
 
 
-## TODOs
-
-````
-Nodeport / ClusterIP support beispiel hier https://github.com/cetic/helm-microservice/tree/master/templates
-
-https://github.com/hazelcast/charts/blob/master/stable/hazelcast-enterprise/values.yaml
-
-https://github.com/cetic/helm-microservice/tree/master/templates
-
-initContainer: ??
-
-````
+# Credits
+* https://github.com/cetic/helm-microservice/tree/master/templates
