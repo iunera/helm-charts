@@ -54,16 +54,16 @@ helm install my-release iunera/springboot --values values.yaml
 Features are: 
 * Default actuator endpoints to `/actuator/health` for `livenessProbe` and `readinessProbe`
 * support `hostAliases` for legacy Applications
+* add `extraArgs` for parameters in spring-boot
 
 ## TODO 
 
 ````
 
-hostalias
+env support
 
 Nodeport / ClusterIP support beispiel hier https://github.com/cetic/helm-microservice/tree/master/templates
 
-extraArgs
 
 configmal support?
 
@@ -71,7 +71,6 @@ configmal support?
 secrets support 
 
 
-env support
 
 
             - name: POSTGRES_REPLICATION_PASSWORD
