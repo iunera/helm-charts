@@ -42,7 +42,7 @@ hostAliases: []
   #   - "bar.remote"
 
 prometheusScrapeMetrics:
-  enabled: true
+  enabled: false
   # port:
   # path:
 
@@ -160,12 +160,12 @@ ingress:
 
 resources:
   limits:
-    cpu: 500m
-    memory: 256Mi
+    cpu: 1000m
+    memory: 512Mi
     ephemeral-storage: "4Gi"
   requests:
     cpu: 500m
-    memory: 256Mi
+    memory: 512Mi
     ephemeral-storage: "2Gi"
 
 

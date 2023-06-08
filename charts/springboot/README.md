@@ -57,7 +57,7 @@ Features are:
 * support configMaps and existingConfigMaps
 * support mounting secrets as volumes for jaas-configs, keystores.jks or ssh keys etc.
 * resource limits per default: `cpu: 500m` / `memory: 256Mi` / `ephemeral-storage: "4Gi"`
-* default prometheus scrape metrics with port `8080` and `/actuator/prometheus`
+* prometheus scrape metrics with port `8080` and `/actuator/prometheus`
 * Principles of least privilege: securityContext with `Drop: ALL`, `readOnlyRootFilesystem` and force to `uid/gid: 1000` by default 
 * `emptyDir /tmp` by default
 
