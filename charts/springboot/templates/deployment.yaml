@@ -20,7 +20,7 @@ spec:
       {{- end }}
       {{- if .Values.prometheusScrapeMetrics.enabled }}
         prometheus.io/scrape: "true"
-        prometheus.io/port: {{ .Values.prometheusScrapeMetrics.port | default .Values.service.port }}
+        prometheus.io/port: {{ .Values.prometheusScrapeMetrics.port | default .Values.service.port | quote }}
         prometheus.io/path: {{ .Values.prometheusScrapeMetrics.path | default "/actuator/prometheus" }}
       {{- end }}
       {{- end }}
