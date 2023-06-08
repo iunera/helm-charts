@@ -51,6 +51,9 @@ We override the values during deployment (via Flux Gitops) with values like in t
 helm install my-release iunera/springboot --values values.yaml
 ````
 
+Features are: 
+* Default actuator endpoints to `/actuator/health` for `livenessProbe` and `readinessProbe`
+
 ## TODO 
 
 ````

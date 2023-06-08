@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: iunera/springboot-dummy
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -13,6 +13,26 @@ image:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+# Default spring pors and actuator endpoints
+containerPort: 8080
+# livenessProbePath: "/actuator/health"
+# readinessProbePath: "/actuator/health"
+
+livenessProbe: {}
+  # httpGet:
+  #   path: /healthz
+  #   port: 8080
+  #   httpHeaders:
+  #   - name: Custom-Header
+  #     value: Awesome
+
+readinessProbe: {}
+
+extraArgs: []
+
+hostAliases: []
+
 
 serviceAccount:
   # Specifies whether a service account should be created
