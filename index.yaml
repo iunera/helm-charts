@@ -1,5 +1,24 @@
 apiVersion: v1
 entries:
+  bitnami-common:
+  - apiVersion: v1
+    appVersion: 0.0.9
+    created: "2023-06-10T09:48:37.123256789Z"
+    deprecated: true
+    description: DEPRECATED Chart with custom templates used in Bitnami charts.
+    digest: 322652dddc6c4a22ebbdc36c38e78bf2a54d683931573eca75afd02177f35503
+    icon: https://bitnami.com/downloads/logos/bitnami-mark.png
+    keywords:
+    - helper
+    - template
+    - bitnami
+    - broker
+    - service
+    - catalog
+    name: bitnami-common
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/bitnami-common-0.0.9/bitnami-common-0.0.9.tgz
+    version: 0.0.9
   dex:
   - apiVersion: v1
     appVersion: 2.27.0
@@ -352,4 +371,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-08T18:41:14.694617963Z"
+generated: "2023-06-10T09:48:37.123281891Z"
