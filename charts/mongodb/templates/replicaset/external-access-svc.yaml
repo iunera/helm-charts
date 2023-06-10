@@ -1,10 +1,11 @@
-{{- if and (eq .Values.architecture "replicaset") .Values.externalAccess.enabled }}
+{{- if and (eq .Values.architecture "replicaset") .Values.externalAccess.enabled (not (eq .Values.externalAccess.service.type "ClusterIP"))}}
 {{- $fullName := include "mongodb.fullname" . }}
 {{- $replicaCount := .Values.replicaCount | int }}
 {{- $root := . }}
 
 {{- range $i, $e := until $replicaCount }}
 {{- $targetPod := printf "%s-%d" (printf "%s" $fullName) $i }}
+{{- $_ := set $ "targetPod" $targetPod }}
 ---
 apiVersion: v1
 kind: Service
