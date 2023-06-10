@@ -1,10 +1,9 @@
 annotations:
   category: Database
-apiVersion: v1
-appVersion: 4.4.1
+apiVersion: v2
+appVersion: 4.4.4
 description: NoSQL document-oriented database that stores JSON-like documents with
   dynamic schemas, simplifying the integration of data in content-driven applications.
-engine: gotpl
 home: https://github.com/bitnami/charts/tree/master/bitnami/mongodb
 icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
 keywords:
@@ -21,4 +20,4 @@ name: mongodb
 sources:
 - https://github.com/bitnami/bitnami-docker-mongodb
 - https://mongodb.org
-version: 9.2.4
+version: 10.12.0
