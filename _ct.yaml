@@ -20,3 +20,4 @@ excluded-charts:
   - strimzi-kafka-operator
   - wordpress
   - mariadb
+  - bitnami-common
