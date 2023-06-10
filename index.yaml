@@ -151,6 +151,34 @@ entries:
   mongodb:
   - annotations:
       category: Database
+    apiVersion: v2
+    appVersion: 4.4.4
+    created: "2023-06-10T10:34:07.471645846Z"
+    description: NoSQL document-oriented database that stores JSON-like documents
+      with dynamic schemas, simplifying the integration of data in content-driven
+      applications.
+    digest: d408e45c7aa00e8adaaaae20ec09efd4b50d31c85d3ebf3ed30e341b8c975cb3
+    home: https://github.com/bitnami/charts/tree/master/bitnami/mongodb
+    icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    - cluster
+    - replicaset
+    - replication
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: mongodb
+    sources:
+    - https://github.com/bitnami/bitnami-docker-mongodb
+    - https://mongodb.org
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/mongodb-10.12.0/mongodb-10.12.0.tgz
+    version: 10.12.0
+  - annotations:
+      category: Database
     apiVersion: v1
     appVersion: 4.4.1
     created: "2023-06-10T10:07:25.850742309Z"
@@ -400,4 +428,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-10T10:07:25.850762909Z"
+generated: "2023-06-10T10:34:07.471668746Z"
