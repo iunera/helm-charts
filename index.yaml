@@ -148,6 +148,35 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/metabase-0.13.2/metabase-0.13.2.tgz
     version: 0.13.2
+  mongodb:
+  - annotations:
+      category: Database
+    apiVersion: v1
+    appVersion: 4.4.1
+    created: "2023-06-10T10:07:25.850742309Z"
+    description: NoSQL document-oriented database that stores JSON-like documents
+      with dynamic schemas, simplifying the integration of data in content-driven
+      applications.
+    digest: 02218c91ae9d10e4d21efba24d3999e389c9d764b23205e9f204da9dbcaa78c9
+    home: https://github.com/bitnami/charts/tree/master/bitnami/mongodb
+    icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    - cluster
+    - replicaset
+    - replication
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: mongodb
+    sources:
+    - https://github.com/bitnami/bitnami-docker-mongodb
+    - https://mongodb.org
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/mongodb-9.2.4/mongodb-9.2.4.tgz
+    version: 9.2.4
   openldap:
   - apiVersion: v1
     appVersion: 2.4.48
@@ -371,4 +400,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-10T09:48:37.123281891Z"
+generated: "2023-06-10T10:07:25.850762909Z"
