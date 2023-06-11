@@ -132,6 +132,22 @@ entries:
     version: 7.10.4
   metabase:
   - apiVersion: v1
+    appVersion: v0.46.4
+    created: "2023-06-11T11:40:38.557103295Z"
+    description: iunera customized metabase chart from legacy helmcharts
+    digest: a5f7ef097d8a18421c7219909a58bdaf4ca27e43d93b5f5710049eae32e3b400
+    kubeVersion: '>=1.19.0'
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: metabase
+    sources:
+    - https://github.com/metabase/metabase
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/metabase-0.46.4/metabase-0.46.4.tgz
+    version: 0.46.4
+  - apiVersion: v1
     appVersion: v0.38.0.1
     created: "2023-06-07T13:09:46.939944482Z"
     description: iunera customized metabase chart from legacy helmcharts
@@ -442,4 +458,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-11T10:38:43.670009641Z"
+generated: "2023-06-11T11:40:38.557123094Z"
