@@ -436,6 +436,36 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/superset-1.1.13/superset-1.1.13.tgz
     version: 1.1.13
+  - apiVersion: v2
+    appVersion: 2.1.0
+    created: "2023-06-16T06:31:06.360508417Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.6
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.9.4
+    description: Apache Superset is a modern, enterprise-ready business intelligence
+      web application
+    digest: 64a055275654d9d24d7021b0d97c845aeceba155c46b31800815f8e226b50473
+    home: https://superset.apache.org/
+    icon: https://artifacthub.io/image/68c1d717-0e97-491f-b046-754e46f46922@2x
+    keywords:
+    - business intelligence
+    - data science
+    maintainers:
+    - email: craig@craigrueda.com
+      name: craig-rueda
+      url: https://github.com/craig-rueda
+    name: superset
+    sources:
+    - https://github.com/apache/superset
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/superset-0.10.2/superset-0.10.2.tgz
+    version: 0.10.2
   wordpress:
   - apiVersion: v2
     appVersion: 5.5.3
@@ -458,4 +488,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-11T11:40:38.557123094Z"
+generated: "2023-06-16T06:31:06.360538418Z"
