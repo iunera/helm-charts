@@ -49,8 +49,6 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
-
-
 {{/*
 Selector labels
 */}}
@@ -58,10 +56,6 @@ Selector labels
 app.kubernetes.io/name: {{ include "dex.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-
-
-
 
 {{/*
 Create the name of the service account to use
