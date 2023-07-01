@@ -8,7 +8,7 @@ replicaCount: 1
 
 image:
   repository: dexidp/dex
-  tag: v2.27.0
+  tag: ""
   pullPolicy: IfNotPresent
 
 service:
