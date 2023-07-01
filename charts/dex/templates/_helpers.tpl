@@ -6,6 +6,11 @@ Expand the name of the chart.
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "dex.existingEnvSecretName" -}}
+{{- default .Values.existingEnvSecret.name -}}
+{{- end -}}
+
+
 {{/*
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
@@ -44,8 +49,6 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
-
-
 {{/*
 Selector labels
 */}}
@@ -53,10 +56,6 @@ Selector labels
 app.kubernetes.io/name: {{ include "dex.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-
-
-
 
 {{/*
 Create the name of the service account to use
