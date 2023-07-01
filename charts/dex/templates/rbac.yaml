@@ -23,6 +23,8 @@ rules:
   - authcodes
   - authrequests
   - connectors
+  - devicerequests
+  - devicetokens
   - oauth2clients
   - offlinesessionses
   - passwords
