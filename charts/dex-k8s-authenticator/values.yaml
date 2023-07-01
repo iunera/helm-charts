@@ -7,7 +7,7 @@ global:
 replicaCount: 1
 
 image:
-  repository: mintel/dex-k8s-authenticator
+  repository: iunera/dex-k8s-authenticator
   tag: 1.4.0
   pullPolicy: Always
 
