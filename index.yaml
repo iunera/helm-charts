@@ -22,6 +22,22 @@ entries:
   dex:
   - apiVersion: v1
     appVersion: v2.37.0
+    created: "2023-07-01T23:01:19.014923629Z"
+    description: Dex federated authentication service
+    digest: 549431089b86ef7817dd24b739383983c891c4a980bcfe9778fbd452f157f3a6
+    icon: https://github.com/coreos/dex/blob/master/Documentation/logos/dex-horizontal-color.png
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: dex
+    sources:
+    - https://github.com/coreos/dex
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/dex-1.6.3/dex-1.6.3.tgz
+    version: 1.6.3
+  - apiVersion: v1
+    appVersion: v2.37.0
     created: "2023-07-01T19:32:02.1724929Z"
     description: Dex federated authentication service
     digest: c61b34110fe58c70f6b3cbf1b94a3468ace4646df2c9c12bedbeb86cb8a3a36f
@@ -591,4 +607,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2023-07-01T20:24:36.742270517Z"
+generated: "2023-07-01T23:01:19.014966429Z"
