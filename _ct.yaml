@@ -8,13 +8,10 @@ chart-repos:
 helm-extra-args: --timeout 600s
 helm-dependency-extra-args: --skip-refresh
 excluded-charts:
-  - dex-k8s-authenticator
   - kafkamagic
   - ldapadmin
   - openldap
-  - postgresql-legacy
   - superset
-  - ldap-user-manager
   - pivot
   - wordpress
   - mariadb
