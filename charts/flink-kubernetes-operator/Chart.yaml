@@ -24,3 +24,7 @@ type: application
 version: 1.6.1
 appVersion: 1.6.1
 icon: https://flink.apache.org/img/logo/png/50/color_50.png
+
+maintainers:
+  - name: flink
+    url: https://downloads.apache.org/flink/
