@@ -25,7 +25,7 @@
 image:
   repository: ghcr.io/apache/flink-kubernetes-operator
   pullPolicy: IfNotPresent
-  tag: "51eeae1"
+  tag: "ccb10b8"
   # If image digest is set then it takes precedence and the image tag will be ignored
   # digest: ""
 
@@ -65,10 +65,18 @@ operatorPod:
   env:
   # - name: ""
   #   value: ""
+  # - name: ""
+  #   valueFrom:
+  #     configMapKeyRef:
+  #       name: ""
+  #       key: ""
   # dnsPolicy: ""
   # dnsConfig: {}
   # Node labels for operator pod assignment
   # https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
+  envFrom:
+  # - configMapRef:
+  #     name: ""
   nodeSelector: {}
   # Node tolerations for operator pod assignment
   # https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
