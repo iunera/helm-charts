@@ -151,6 +151,20 @@ entries:
     version: 1.4.0
   flink-kubernetes-operator:
   - apiVersion: v2
+    appVersion: 1.8.0
+    created: "2024-04-09T09:07:41.991277094Z"
+    description: A Helm chart for the Apache Flink Kubernetes Operator
+    digest: 3698ed8399f6f3d05f2bc48565b9c9546403065a159b8fd897c094b54772a823
+    icon: https://flink.apache.org/img/logo/png/50/color_50.png
+    maintainers:
+    - name: flink
+      url: https://downloads.apache.org/flink/
+    name: flink-kubernetes-operator
+    type: application
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/flink-kubernetes-operator-1.8.0/flink-kubernetes-operator-1.8.0.tgz
+    version: 1.8.0
+  - apiVersion: v2
     appVersion: 1.7.0
     created: "2024-02-27T20:21:28.723716956Z"
     description: A Helm chart for the Apache Flink Kubernetes Operator
@@ -636,4 +650,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2024-02-27T20:21:28.723806353Z"
+generated: "2024-04-09T09:07:41.99132861Z"
