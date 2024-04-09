@@ -25,7 +25,7 @@
 image:
   repository: ghcr.io/apache/flink-kubernetes-operator
   pullPolicy: IfNotPresent
-  tag: "ccb10b8"
+  tag: "91d67d9"
   # If image digest is set then it takes precedence and the image tag will be ignored
   # digest: ""
 
@@ -194,3 +194,11 @@ operatorHealth:
 
 # Set postStart hook of the main container
 postStart: {}
+
+# Configuration for tls
+tls:
+  create: false
+  secretName: flink-operator-cert
+  secretKeyRef:
+    name: operator-certificate-password
+    key: password
