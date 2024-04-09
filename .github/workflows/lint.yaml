@@ -43,5 +43,8 @@ jobs:
         uses: helm/kind-action@v1.2.0
         if: steps.list-changed.outputs.changed == 'true'
 
+      - name: install cert-manager crd
+        run: kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.4/cert-manager.crds.yaml
+
       - name: Run chart-testing (install)
         run: ct install --config _ct.yaml
