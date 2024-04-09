@@ -16,3 +16,4 @@ excluded-charts:
   - wordpress
   - mariadb
   - bitnami-common
+  - flink-kubernetes-operator
