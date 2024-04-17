@@ -13,3 +13,4 @@ https://www.iunera.com
 
 # Charts
 * [Springboot Chart](charts/springboot/README.md)
+* druid-exporter Chart
