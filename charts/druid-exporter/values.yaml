@@ -30,6 +30,19 @@ commonLabels:
 podAnnotations: {}
 podLabels: {}
 
+env: {}
+  # - name: DRUID_URL
+  #   value: http://localhost:8888
+  # - name: INSECURE_TLS_VERIFY
+  #   value: "false"
+  # - name: LOG_LEVEL
+  #   value: info
+  # - name: HAS_MIDDLEMANAGER
+  #   value: "true"
+  # - name: DRUID_USER
+  #   value: "<add username on basic authenticate druids>"
+  # - name: DRUID_PASSWORD
+  #   value: "<add password on basic authenticate druids>"
 
 podSecurityContext: {}
   # fsGroup: 2000
