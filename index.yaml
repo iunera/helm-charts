@@ -149,6 +149,25 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/dex-k8s-authenticator-1.4.0/dex-k8s-authenticator-1.4.0.tgz
     version: 1.4.0
+  druid-exporter:
+  - apiVersion: v2
+    appVersion: 0.20.1
+    created: "2024-04-17T07:46:50.075382177Z"
+    description: A Helm chart for druid-exporter
+    digest: f45be30696857ffcb8242052567009706f7f2e0e53afe9f14997a89b94666f6b
+    icon: https://www.iunera.com/wp-content/uploads/2020/01/iuneralogo-header.png
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: druid-exporter
+    sources:
+    - https://github.com/iunera/druid-exporter
+    - https://github.com/iunera/helm-charts/tree/main/charts/druid-exporter
+    type: application
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/druid-exporter-0.20.1/druid-exporter-0.20.1.tgz
+    version: 0.20.1
   flink-kubernetes-operator:
   - apiVersion: v2
     appVersion: 1.8.0
@@ -650,4 +669,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2024-04-09T09:07:41.99132861Z"
+generated: "2024-04-17T07:46:50.075465272Z"
