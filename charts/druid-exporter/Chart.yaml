@@ -1,0 +1,18 @@
+apiVersion: v2
+name: druid-exporter
+description: A Helm chart for druid-exporter
+
+type: application
+
+version: 0.20.1
+appVersion: "0.20.1"
+
+maintainers:
+  - name: iunera
+    email: contact@iunera.com
+    url: https://www.iunera.com
+
+icon: https://www.iunera.com/wp-content/uploads/2020/01/iuneralogo-header.png
+sources:
+- https://github.com/iunera/druid-exporter
+- https://github.com/iunera/helm-charts/tree/main/charts/druid-exporter
