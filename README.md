@@ -13,4 +13,4 @@ https://www.iunera.com
 
 # Charts
 * [Springboot Chart](charts/springboot/README.md)
-* druid-exporter Chart
+* [druid-exporter Chart](https://github.com/iunera/druid-exporter/README.md)
