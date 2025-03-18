@@ -9,7 +9,8 @@ helm repo add iunera https://iunera.github.io/helm-charts
 
 # More
 Visit our website:
-https://www.iunera.com
+* https://www.iunera.com
+* https://www.license-token.com/wiki
 
 # Charts
 * [Springboot Chart](charts/springboot/README.md)
