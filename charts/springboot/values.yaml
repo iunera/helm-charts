@@ -73,6 +73,7 @@ volumes:
     #       hello2
     # - name: environment-config
     #   mountPath: /environment
+    #   subPath: SPECIAL_LEVEL # optional: mount only a specific key from the configmap
     #   data:
     #     SPECIAL_LEVEL: very
     #     SPECIAL_TYPE: charm
@@ -83,6 +84,7 @@ volumes:
     #       destination: application.conf
     # - name: test-mixed
     #   mountPath: /test3
+    #   subPath: test2.conf # optional: mount only a specific file from the configmap
     #   data:
     #     test2.conf: |
     #       another hello
@@ -94,6 +96,7 @@ volumes:
     # - name: kube-root-ca # name of the volumeMount and volume in lowercase RFC 1123 format
     #   configmap: kube-root-ca.crt # name of the configmap
     #   mountPath: /kube-root-ca
+    #   subPath: ca.crt # optional: mount only a specific file from the configmap
     # - name: game-config
     #   configmap: game-config
     #   mountPath: /game-config

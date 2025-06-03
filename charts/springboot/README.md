@@ -54,7 +54,7 @@ Features are:
 * support `hostAliases` for legacy Applications
 * support `extraArgs` for parameters in spring-boot
 * support PVC Templates and existing PVCs
-* support configMaps and existingConfigMaps
+* support configMaps and existingConfigMaps with optional subPath for mounting specific files
 * support mounting secrets as volumes for jaas-configs, keystores.jks or ssh keys etc.
 * resource limits per default: `cpu: 500m` / `memory: 256Mi` / `ephemeral-storage: "4Gi"`
 * prometheus scrape metrics with port `8080` and `/actuator/prometheus`

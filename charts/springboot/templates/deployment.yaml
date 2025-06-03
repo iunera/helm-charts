@@ -62,7 +62,7 @@ spec:
           args:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          
+
           {{- if .Values.livenessProbe }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
@@ -91,11 +91,17 @@ spec:
             {{- range $existing := .Values.volumes.existingConfigMaps }}
             - mountPath: {{ $existing.mountPath }}
               name: {{ $existing.name }}
+              {{- if $existing.subPath }}
+              subPath: {{ $existing.subPath }}
+              {{- end }}
             {{- end }}
 
             {{- range $conf := .Values.volumes.configMaps }}
             - mountPath: {{ $conf.mountPath }}
               name: {{ $conf.name }}
+              {{- if $conf.subPath }}
+              subPath: {{ $conf.subPath }}
+              {{- end }}
             {{- end }}
 
             {{- range $existing := .Values.volumes.existingSecrets }}
