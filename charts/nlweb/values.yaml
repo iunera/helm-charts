@@ -6,7 +6,6 @@ replicaCount: 1
 
 image:
   repository: iunera/nlweb
-  tag: latest
   pullPolicy: IfNotPresent
 
 imagePullSecrets: [ ]
