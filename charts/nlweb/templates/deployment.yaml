@@ -1,0 +1,146 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nlweb.fullname" . }}
+  labels:
+    {{- include "nlweb.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "nlweb.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- if .Values.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "nlweb.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "nlweb.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- with .Values.hostAliases }}
+      hostAliases:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+
+          {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.extraArgs }}
+          args:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- if .Values.livenessProbe }}
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
+
+          {{- if .Values.readinessProbe }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.volumes.enabled }}
+          volumeMounts:
+            {{- range $existing := .Values.volumes.existingConfigMaps }}
+            - mountPath: {{ $existing.mountPath }}
+              name: {{ $existing.name }}
+            {{- end }}
+
+            {{- range $conf := .Values.volumes.configMaps }}
+            {{- range $filename, $content := $conf.data }}
+            - mountPath: {{ $conf.mountPath }}/{{ $filename }}
+              name: {{ $conf.name }}
+              subPath: {{ $filename }}
+            {{- end }}
+            {{- end }}
+
+            {{- range $existing := .Values.volumes.existingSecrets }}
+            - mountPath: {{ $existing.mountPath }}
+              name: {{ $existing.name }}
+            {{- end }}
+
+            {{- range $emptyDir := .Values.volumes.emptyDirs }}
+            - mountPath: {{ $emptyDir.mountPath }}
+              name: {{ $emptyDir.name }}
+            {{- end }}
+
+            {{- if .Values.volumes.pvc.enabled }}
+            - mountPath: {{ .Values.volumes.pvc.mountPath }}
+              name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}
+            {{- end }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+      {{- if .Values.volumes.enabled }}
+      volumes:
+        {{- range $existing := .Values.volumes.existingConfigMaps }}
+        - name: {{ $existing.name }}
+          configMap:
+            name: {{ $existing.configmap }}
+        {{- end }}
+        {{- range $conf := .Values.volumes.configMaps }}
+        - name: {{ $conf.name }}
+          configMap:
+            name: {{ $conf.name }}
+        {{- end }}
+        {{- range $existing := .Values.volumes.existingSecrets }}
+        - name: {{ $existing.name }}
+          secret:
+            secretName: {{ $existing.secretName }}
+        {{- end }}
+
+        {{- range $emptyDir := .Values.volumes.emptyDirs }}
+        - name: {{ $emptyDir.name }}
+          emptyDir: { }
+        {{- end }}
+
+      {{- if .Values.volumes.pvc.enabled}}
+        - name: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.volumes.pvc.existing_claim | default .Values.volumes.pvc.name }}
+      {{- end}}
+      {{- end }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
