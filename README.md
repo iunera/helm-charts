@@ -14,4 +14,5 @@ Visit our website:
 
 # Charts
 * [Springboot Chart](charts/springboot/README.md)
+* [nlweb Chart](charts/nlweb/README.md)
 * [druid-exporter Chart](https://github.com/iunera/druid-exporter/README.md)
