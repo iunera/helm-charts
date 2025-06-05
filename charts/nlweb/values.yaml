@@ -8,7 +8,7 @@ image:
   repository: iunera/nlweb
   pullPolicy: IfNotPresent
 
-imagePullSecrets: [ ]
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -24,11 +24,11 @@ env:
   - name: NLWEB_LOGGING_PROFILE
     value: production
 
-envFrom: { }
+envFrom: {}
 
-extraArgs: [ ]
+extraArgs: []
 
-hostAliases: [ ]
+hostAliases: []
 
 volumes:
   enabled: true
@@ -42,7 +42,7 @@ volumes:
     enabled: false
 
   # ConfigMap section for NLweb settings - See example with the config_webserver.yaml
-  configMaps: [ ]
+  configMaps: []
   #    - name: nlweb-config
   #      mountPath: /app/config
   #      data:
@@ -72,8 +72,8 @@ volumes:
   #              cache_max_age: 3600
   #              gzip_enabled: true
 
-  existingConfigMaps: [ ]
-  existingSecrets: [ ]
+  existingConfigMaps: []
+  existingSecrets: []
 
 livenessProbe:
   httpGet:
@@ -95,10 +95,10 @@ readinessProbe:
 
 serviceAccount:
   create: false
-  annotations: { }
+  annotations: {}
   name: ""
 
-podAnnotations: { }
+podAnnotations: {}
 
 podSecurityContext:
   runAsUser: 999
@@ -110,7 +110,7 @@ securityContext:
   capabilities:
     drop:
       - ALL
-    add: [ ]
+    add: []
   readOnlyRootFilesystem: true
   runAsNonRoot: true
   runAsUser: 999
@@ -118,15 +118,15 @@ securityContext:
 ingress:
   enabled: false
   className: ""
-  annotations: { }
+  annotations: {}
   hosts:
     - host: chart-example.local
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: [ ]
+  tls: []
 
-resources: { }
+resources: {}
 #  limits:
 #    cpu: 1000m
 #    memory: 2Gi
@@ -140,8 +140,8 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
 
-nodeSelector: { }
+nodeSelector: {}
 
-tolerations: [ ]
+tolerations: []
 
-affinity: { }
+affinity: {}
