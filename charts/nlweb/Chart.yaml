@@ -1,6 +1,6 @@
 apiVersion: v2
 name: nlweb
-description: A Helm chart for Kubernetes to host nlweb application
+description: A Helm chart for deploying the NLWeb application on Kubernetes. This chart provides a flexible and configurable deployment solution with support for various Kubernetes features.
 
 type: application
 
@@ -17,3 +17,4 @@ icon: https://www.iunera.com/wp-content/uploads/2020/01/iuneralogo-header.png
 sources:
   - https://github.com/iunera
   - https://github.com/iunera/helm-charts/tree/main/charts/nlweb
+  - https://hub.docker.com/r/iunera/nlweb
