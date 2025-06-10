@@ -365,6 +365,27 @@ entries:
   nlweb:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-06-10T05:30:03.253671486Z"
+    description: A Helm chart for deploying the NLWeb application on Kubernetes. This
+      chart provides a flexible and configurable deployment solution with support
+      for various Kubernetes features.
+    digest: e8672eb5ce3b5c2177dacda270453d8dcea066c32ac55837383af2b7da6c1e21
+    icon: https://www.iunera.com/wp-content/uploads/2020/01/iuneralogo-header.png
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: nlweb
+    sources:
+    - https://github.com/iunera
+    - https://github.com/iunera/helm-charts/tree/main/charts/nlweb
+    - https://hub.docker.com/r/iunera/nlweb
+    type: application
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/nlweb-1.1.0/nlweb-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-06-05T11:26:35.821260539Z"
     description: A Helm chart for deploying the NLWeb application on Kubernetes. This
       chart provides a flexible and configurable deployment solution with support
@@ -691,4 +712,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2025-06-05T11:26:35.821332428Z"
+generated: "2025-06-10T05:30:03.253718064Z"
