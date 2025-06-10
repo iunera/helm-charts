@@ -72,7 +72,11 @@ volumes:
   #              cache_max_age: 3600
   #              gzip_enabled: true
 
+  # List of existing ConfigMaps to mount
   existingConfigMaps: []
+  # - name: my-config-volume
+  #   configmap: my-existing-configmap
+  #   mountPath: /app/config
   existingSecrets: []
 
 livenessProbe:
