@@ -102,6 +102,11 @@ customuploadsini: |
   post_max_size = 500M
   max_execution_time = 600
 
+customFunctionsTarget: "/var/www/html/wp-content/themes/colibri-wp/functions.php"
+customFunctionsPhp: ""
+
+initContainers: []
+
 
 ##
 ## External Database Configuration
