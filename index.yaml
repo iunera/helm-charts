@@ -672,6 +672,27 @@ entries:
   wordpress:
   - apiVersion: v2
     appVersion: 5.9.3
+    created: "2026-10-27T13:10:21.314698324Z"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://iunera.github.io/helm-charts
+      tags:
+      - wordpress-database
+      version: 7.x.x
+    description: iunera Wordpress Helm chart for Kubernetes
+    digest: 67776d47b509cf3ce19b543d278a16e6a5877e4f84f7ec2210c0813f3dfb2f72
+    maintainers:
+    - email: contact@iunera.com
+      name: iunera
+      url: https://www.iunera.com
+    name: wordpress
+    type: application
+    urls:
+    - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.3/wordpress-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 5.9.3
     created: "2023-06-18T18:01:28.892276834Z"
     dependencies:
     - condition: mariadb.enabled
@@ -712,4 +733,4 @@ entries:
     urls:
     - https://github.com/iunera/helm-charts/releases/download/wordpress-0.1.1/wordpress-0.1.1.tgz
     version: 0.1.1
-generated: "2025-06-10T05:30:03.253718064Z"
+generated: "2026-10-27T13:10:21.314762072Z"
