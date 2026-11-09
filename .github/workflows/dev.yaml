@@ -1,0 +1,81 @@
+name: Dev - Lint and Package Charts
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build-dev:
+    name: Lint and Package Dev Charts
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Add Helm repos for chart dependencies
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add iunera https://iunera.github.io/helm-charts
+
+      - name: Lint and Package Dev Charts (Build Only)
+        run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          echo "Testing build for commit SHA: $SHORT_SHA"
+
+          # Detect modified charts relative to origin/main
+          CHANGED_CHARTS=$(git diff --name-only origin/main HEAD | grep '^charts/' | cut -d/ -f1,2 | sort -u || true)
+
+          if [ -z "$CHANGED_CHARTS" ]; then
+            echo "No charts modified relative to main."
+            exit 0
+          fi
+
+          mkdir -p .packaged
+
+          for chart_dir in $CHANGED_CHARTS; do
+            if [ ! -f "$chart_dir/Chart.yaml" ]; then
+              continue
+            fi
+
+            ORIG_NAME=$(yq '.name' "$chart_dir/Chart.yaml")
+            CHART_NAME="chart-${ORIG_NAME#chart-}" # Ensure prefix 'chart-'
+            BASE_VER=$(yq '.version' "$chart_dir/Chart.yaml")
+            DEV_VER="${BASE_VER}-dev.${SHORT_SHA}"
+
+            echo "=========================================="
+            echo "Processing dev chart: $CHART_NAME (dev version: $DEV_VER)"
+            echo "=========================================="
+
+            # 1. Build dependencies (e.g. MariaDB)
+            if [ -f "$chart_dir/Chart.lock" ] || grep -q "dependencies:" "$chart_dir/Chart.yaml"; then
+              echo "Building dependencies for $ORIG_NAME..."
+              helm dependency build "$chart_dir"
+            fi
+
+            # 2. Native Helm Lint & Template Rendering validation
+            echo "Linting $ORIG_NAME..."
+            helm lint "$chart_dir"
+            echo "Testing template rendering for $ORIG_NAME..."
+            helm template test "$chart_dir" > /dev/null
+
+            # 3. Package chart with 'chart-' prefix (Verifies packaging succeeds, no push)
+            BUILD_DIR=$(mktemp -d)
+            cp -r "$chart_dir" "$BUILD_DIR/$CHART_NAME"
+            yq -i ".name = \"$CHART_NAME\"" "$BUILD_DIR/$CHART_NAME/Chart.yaml"
+
+            echo "Packaging $CHART_NAME as version $DEV_VER..."
+            helm package "$BUILD_DIR/$CHART_NAME" --version "$DEV_VER" --destination .packaged
+            rm -rf "$BUILD_DIR"
+          done
+
+          echo "✅ All modified charts successfully linted, rendered, and packaged (build only)."
+          ls -lh .packaged

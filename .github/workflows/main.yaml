@@ -1,0 +1,106 @@
+name: Release Charts to Docker Hub (OCI)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release-oci:
+    name: Lint, Package and Push OCI Charts
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Login to Docker Hub OCI Registry
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | helm registry login registry-1.docker.io \
+            --username "${{ secrets.DOCKERHUB_USERNAME }}" \
+            --password-stdin
+
+      - name: Add Helm repos for chart dependencies
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add iunera https://iunera.github.io/helm-charts
+
+      - name: Validate, Package and Push Charts
+        run: |
+          # Identify which chart folders were modified in this push
+          CHANGED_CHARTS=$(git diff --name-only HEAD~1 HEAD | grep '^charts/' | cut -d/ -f1,2 | sort -u || true)
+
+          if [ -z "$CHANGED_CHARTS" ]; then
+            echo "No charts modified in this push."
+            exit 0
+          fi
+
+          mkdir -p .packaged
+
+          for chart_dir in $CHANGED_CHARTS; do
+            if [ ! -f "$chart_dir/Chart.yaml" ]; then
+              continue
+            fi
+
+            ORIG_NAME=$(yq '.name' "$chart_dir/Chart.yaml")
+            CHART_NAME="chart-${ORIG_NAME#chart-}" # Ensure prefix 'chart-'
+            CURRENT_VER=$(yq '.version' "$chart_dir/Chart.yaml")
+
+            echo "=========================================="
+            echo "Inspecting chart: $CHART_NAME (version: $CURRENT_VER)"
+            echo "=========================================="
+
+            # 1. Enforce local Chart.yaml version bump
+            if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
+              PREV_VER=$(git show HEAD~1:"$chart_dir/Chart.yaml" 2>/dev/null | yq '.version' || echo "")
+              if [ -n "$PREV_VER" ] && [ "$CURRENT_VER" = "$PREV_VER" ]; then
+                echo "❌ ERROR: Chart '$ORIG_NAME' was modified but version ($CURRENT_VER) was NOT bumped in $chart_dir/Chart.yaml!"
+                exit 1
+              fi
+            fi
+
+            # 2. Enforce remote collision check (fails if this version already exists in Docker Hub)
+            echo "Checking if $CHART_NAME:$CURRENT_VER already exists on Docker Hub OCI..."
+            PULL_TEST_DIR=$(mktemp -d)
+            if helm pull "oci://registry-1.docker.io/iunera/$CHART_NAME" --version "$CURRENT_VER" -d "$PULL_TEST_DIR" >/dev/null 2>&1; then
+              echo "❌ ERROR: Version $CURRENT_VER for chart '$CHART_NAME' already exists on Docker Hub OCI!"
+              echo "You must bump the version in $chart_dir/Chart.yaml before releasing."
+              rm -rf "$PULL_TEST_DIR"
+              exit 1
+            fi
+            rm -rf "$PULL_TEST_DIR"
+
+            # 3. Build dependencies (e.g. MariaDB)
+            if [ -f "$chart_dir/Chart.lock" ] || grep -q "dependencies:" "$chart_dir/Chart.yaml"; then
+              echo "Building dependencies for $ORIG_NAME..."
+              helm dependency build "$chart_dir"
+            fi
+
+            # 4. Lint and Template Test
+            echo "Linting $ORIG_NAME..."
+            helm lint "$chart_dir"
+            echo "Testing template rendering for $ORIG_NAME..."
+            helm template test "$chart_dir" > /dev/null
+
+            # 5. Package chart with 'chart-' prefix for Docker Hub OCI
+            BUILD_DIR=$(mktemp -d)
+            cp -r "$chart_dir" "$BUILD_DIR/$CHART_NAME"
+            yq -i ".name = \"$CHART_NAME\"" "$BUILD_DIR/$CHART_NAME/Chart.yaml"
+
+            echo "Packaging $CHART_NAME ($CURRENT_VER)..."
+            helm package "$BUILD_DIR/$CHART_NAME" --destination .packaged
+            rm -rf "$BUILD_DIR"
+          done
+
+          # 6. Push all verified packages to Docker Hub
+          for pkg in .packaged/*.tgz; do
+            echo "🚀 Pushing $pkg to oci://registry-1.docker.io/iunera..."
+            helm push "$pkg" oci://registry-1.docker.io/iunera
+          done
