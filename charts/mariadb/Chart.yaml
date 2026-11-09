@@ -22,4 +22,4 @@ sources:
 - https://github.com/bitnami/bitnami-docker-mariadb
 - https://github.com/prometheus/mysqld_exporter
 - https://mariadb.org
-version: 7.10.4
+version: 7.10.5

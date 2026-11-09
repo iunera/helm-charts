@@ -21,11 +21,6 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v4
 
-      - name: Add Helm repos for chart dependencies
-        run: |
-          helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo add iunera https://iunera.github.io/helm-charts
-
       - name: Lint and Package Dev Charts (Build Only)
         run: |
           SHORT_SHA=$(git rev-parse --short HEAD)
