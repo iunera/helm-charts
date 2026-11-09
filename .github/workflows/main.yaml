@@ -27,11 +27,6 @@ jobs:
             --username "${{ secrets.DOCKERHUB_USERNAME }}" \
             --password-stdin
 
-      - name: Add Helm repos for chart dependencies
-        run: |
-          helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo add iunera https://iunera.github.io/helm-charts
-
       - name: Validate, Package and Push Charts
         run: |
           # Identify which chart folders were modified in this push

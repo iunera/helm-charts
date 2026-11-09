@@ -67,7 +67,6 @@ spec:
 | **dex** | `oci://registry-1.docker.io/iunera/chart-dex` | OpenID Connect (OIDC) identity provider |
 | **openldap** | `oci://registry-1.docker.io/iunera/chart-openldap` | OpenLDAP directory server |
 | **druid-exporter** | `oci://registry-1.docker.io/iunera/chart-druid-exporter` | Prometheus exporter for Apache Druid |
-| **bitnami-common** | `oci://registry-1.docker.io/iunera/chart-bitnami-common` | Shared helper templates and library charts |
 
 ---
 
