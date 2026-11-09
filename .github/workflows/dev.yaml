@@ -52,7 +52,8 @@ jobs:
               continue
             fi
 
-            CHART_NAME=$(yq '.name' "$chart_dir/Chart.yaml")
+            ORIG_NAME=$(yq '.name' "$chart_dir/Chart.yaml")
+            CHART_NAME="chart-${ORIG_NAME#chart-}" # Ensure prefix 'chart-'
             BASE_VER=$(yq '.version' "$chart_dir/Chart.yaml")
             DEV_VER="${BASE_VER}-dev.${SHORT_SHA}"
 
@@ -62,19 +63,24 @@ jobs:
 
             # 1. Build dependencies (e.g. MariaDB)
             if [ -f "$chart_dir/Chart.lock" ] || grep -q "dependencies:" "$chart_dir/Chart.yaml"; then
-              echo "Building dependencies for $CHART_NAME..."
+              echo "Building dependencies for $ORIG_NAME..."
               helm dependency build "$chart_dir"
             fi
 
             # 2. Native Helm Lint & Template Rendering validation
-            echo "Linting $CHART_NAME..."
+            echo "Linting $ORIG_NAME..."
             helm lint "$chart_dir"
-            echo "Testing template rendering for $CHART_NAME..."
+            echo "Testing template rendering for $ORIG_NAME..."
             helm template test "$chart_dir" > /dev/null
 
-            # 3. Package chart with prerelease version
+            # 3. Package chart with 'chart-' prefix for Docker Hub OCI
+            BUILD_DIR=$(mktemp -d)
+            cp -r "$chart_dir" "$BUILD_DIR/$CHART_NAME"
+            yq -i ".name = \"$CHART_NAME\"" "$BUILD_DIR/$CHART_NAME/Chart.yaml"
+
             echo "Packaging $CHART_NAME as version $DEV_VER..."
-            helm package "$chart_dir" --version "$DEV_VER" --destination .packaged
+            helm package "$BUILD_DIR/$CHART_NAME" --version "$DEV_VER" --destination .packaged
+            rm -rf "$BUILD_DIR"
           done
 
           # 4. Push all packaged dev charts to Docker Hub

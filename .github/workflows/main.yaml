@@ -49,7 +49,8 @@ jobs:
               continue
             fi
 
-            CHART_NAME=$(yq '.name' "$chart_dir/Chart.yaml")
+            ORIG_NAME=$(yq '.name' "$chart_dir/Chart.yaml")
+            CHART_NAME="chart-${ORIG_NAME#chart-}" # Ensure prefix 'chart-'
             CURRENT_VER=$(yq '.version' "$chart_dir/Chart.yaml")
 
             echo "=========================================="
@@ -60,7 +61,7 @@ jobs:
             if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
               PREV_VER=$(git show HEAD~1:"$chart_dir/Chart.yaml" 2>/dev/null | yq '.version' || echo "")
               if [ -n "$PREV_VER" ] && [ "$CURRENT_VER" = "$PREV_VER" ]; then
-                echo "❌ ERROR: Chart '$CHART_NAME' was modified but version ($CURRENT_VER) was NOT bumped in $chart_dir/Chart.yaml!"
+                echo "❌ ERROR: Chart '$ORIG_NAME' was modified but version ($CURRENT_VER) was NOT bumped in $chart_dir/Chart.yaml!"
                 exit 1
               fi
             fi
@@ -78,19 +79,24 @@ jobs:
 
             # 3. Build dependencies (e.g. MariaDB)
             if [ -f "$chart_dir/Chart.lock" ] || grep -q "dependencies:" "$chart_dir/Chart.yaml"; then
-              echo "Building dependencies for $CHART_NAME..."
+              echo "Building dependencies for $ORIG_NAME..."
               helm dependency build "$chart_dir"
             fi
 
             # 4. Lint and Template Test
-            echo "Linting $CHART_NAME..."
+            echo "Linting $ORIG_NAME..."
             helm lint "$chart_dir"
-            echo "Testing template rendering for $CHART_NAME..."
+            echo "Testing template rendering for $ORIG_NAME..."
             helm template test "$chart_dir" > /dev/null
 
-            # 5. Package chart
+            # 5. Package chart with 'chart-' prefix for Docker Hub OCI
+            BUILD_DIR=$(mktemp -d)
+            cp -r "$chart_dir" "$BUILD_DIR/$CHART_NAME"
+            yq -i ".name = \"$CHART_NAME\"" "$BUILD_DIR/$CHART_NAME/Chart.yaml"
+
             echo "Packaging $CHART_NAME ($CURRENT_VER)..."
-            helm package "$chart_dir" --destination .packaged
+            helm package "$BUILD_DIR/$CHART_NAME" --destination .packaged
+            rm -rf "$BUILD_DIR"
           done
 
           # 6. Push all verified packages to Docker Hub
