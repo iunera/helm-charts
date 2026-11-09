@@ -27,6 +27,8 @@ spec:
 {{ toYaml .Values.podLabels | trim | indent 8 }}
         {{- end }}
     spec:
+      serviceAccountName: {{ include "metabase.serviceAccountName" . }}
+      automountServiceAccountToken: {{ default false (and .Values.serviceAccount .Values.serviceAccount.automountServiceAccountToken) }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
