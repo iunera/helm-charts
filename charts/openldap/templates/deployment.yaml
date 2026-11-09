@@ -34,6 +34,8 @@ spec:
         app: {{ template "openldap.name" . }}
         release: {{ .Release.Name }}
     spec:
+      serviceAccountName: {{ include "openldap.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.automountServiceAccountToken }}
       {{- if or .Values.customLdifFiles .Values.tls.enabled }}
       initContainers:
       {{- end }}

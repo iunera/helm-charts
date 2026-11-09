@@ -32,6 +32,17 @@ tls:
   CA:
     enabled: false
     secret: ""  # The name of a generic secret to use for custom CA certificate (ca.crt)
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+  # Whether to automount the service account token into pods
+  automountServiceAccountToken: false
+
 ## Add additional labels to all resources
 extraLabels: {}
 ## Add additional annotations to pods

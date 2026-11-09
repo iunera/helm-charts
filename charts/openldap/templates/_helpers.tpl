@@ -38,3 +38,14 @@ Generate chart secret name
 {{- define "openldap.secretName" -}}
 {{ default (include "openldap.fullname" .) .Values.existingSecret }}
 {{- end -}}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "openldap.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+{{ default (include "openldap.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+{{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
