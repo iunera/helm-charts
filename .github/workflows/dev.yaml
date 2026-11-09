@@ -1,0 +1,84 @@
+name: Dev - Lint and Push Prerelease OCI Charts
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  release-dev-oci:
+    name: Lint, Package and Push Dev OCI Charts
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Login to Docker Hub OCI Registry
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | helm registry login registry-1.docker.io \
+            --username "${{ secrets.DOCKERHUB_USERNAME }}" \
+            --password-stdin
+
+      - name: Add Helm repos for chart dependencies
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add iunera https://iunera.github.io/helm-charts
+
+      - name: Lint, Package and Push Dev Prerelease Charts
+        run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          echo "Building dev prereleases with commit SHA: $SHORT_SHA"
+
+          # Detect modified charts relative to origin/main
+          CHANGED_CHARTS=$(git diff --name-only origin/main HEAD | grep '^charts/' | cut -d/ -f1,2 | sort -u || true)
+
+          if [ -z "$CHANGED_CHARTS" ]; then
+            echo "No charts modified relative to main."
+            exit 0
+          fi
+
+          mkdir -p .packaged
+
+          for chart_dir in $CHANGED_CHARTS; do
+            if [ ! -f "$chart_dir/Chart.yaml" ]; then
+              continue
+            fi
+
+            CHART_NAME=$(yq '.name' "$chart_dir/Chart.yaml")
+            BASE_VER=$(yq '.version' "$chart_dir/Chart.yaml")
+            DEV_VER="${BASE_VER}-dev.${SHORT_SHA}"
+
+            echo "=========================================="
+            echo "Processing dev chart: $CHART_NAME (dev version: $DEV_VER)"
+            echo "=========================================="
+
+            # 1. Build dependencies (e.g. MariaDB)
+            if [ -f "$chart_dir/Chart.lock" ] || grep -q "dependencies:" "$chart_dir/Chart.yaml"; then
+              echo "Building dependencies for $CHART_NAME..."
+              helm dependency build "$chart_dir"
+            fi
+
+            # 2. Native Helm Lint & Template Rendering validation
+            echo "Linting $CHART_NAME..."
+            helm lint "$chart_dir"
+            echo "Testing template rendering for $CHART_NAME..."
+            helm template test "$chart_dir" > /dev/null
+
+            # 3. Package chart with prerelease version
+            echo "Packaging $CHART_NAME as version $DEV_VER..."
+            helm package "$chart_dir" --version "$DEV_VER" --destination .packaged
+          done
+
+          # 4. Push all packaged dev charts to Docker Hub
+          for pkg in .packaged/*.tgz; do
+            echo "🚀 Pushing dev chart $pkg to oci://registry-1.docker.io/iunera..."
+            helm push "$pkg" oci://registry-1.docker.io/iunera
+          done
